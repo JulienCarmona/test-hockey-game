@@ -1,16 +1,9 @@
 package com.maplr.testhockeygame.repository;
 
-import com.maplr.testhockeygame.service.PlayerService;
-import org.springframework.stereotype.Repository;
+import com.maplr.testhockeygame.model.Player;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public class PlayerRepository {
-
-    private PlayerService playerService;
-
-    public PlayerRepository(PlayerService playerService) {
-        this.playerService = playerService;
-    }
+public interface PlayerRepository extends CrudRepository <Player, Long> {
 
 
 }

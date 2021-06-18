@@ -2,8 +2,9 @@ package com.maplr.testhockeygame.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,15 +15,19 @@ public class Player {
 	private long number;
 	private String name;
 	private String lastName;
+	private String position;
 	private boolean isCaptain;
 
-	@ManyToOne
-	private Team team;
+	@ManyToMany(mappedBy = "players")
+	private List<Team> teams;
 
-	public Player(long number, String name, String lastName, boolean isCaptain) {
+	public Player() {}
+
+	public Player(long number, String name, String lastName, String position, boolean isCaptain) {
 		this.number = number;
 		this.name = name;
 		this.lastName = lastName;
+		this.position = position;
 		this.isCaptain = isCaptain;
 	}
 
@@ -58,17 +63,33 @@ public class Player {
 		isCaptain = captain;
 	}
 
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public List<Team> getTeam() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Player player = (Player) o;
-		return number == player.number && isCaptain == player.isCaptain && Objects.equals(name, player.name) && Objects.equals(lastName, player.lastName) && Objects.equals(team, player.team);
+		return number == player.number && isCaptain == player.isCaptain && Objects.equals(name, player.name) && Objects.equals(lastName, player.lastName) && Objects.equals(position, player.position) && Objects.equals(teams, player.teams);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(number, name, lastName, isCaptain, team);
+		return Objects.hash(number, name, lastName, position, isCaptain, teams);
 	}
 
 	@Override
@@ -77,8 +98,9 @@ public class Player {
 				"number=" + number +
 				", name='" + name + '\'' +
 				", lastName='" + lastName + '\'' +
+				", position='" + position + '\'' +
 				", isCaptain=" + isCaptain +
-				", team=" + team +
+				", teams=" + teams +
 				'}';
 	}
 }

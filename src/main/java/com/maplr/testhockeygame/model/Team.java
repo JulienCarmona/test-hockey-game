@@ -1,9 +1,8 @@
 package com.maplr.testhockeygame.model;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "TEAM")
@@ -15,11 +14,13 @@ public class Team {
 	private String coach;
 	private long year;
 
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "TEAMS_PLAYERS",
+	joinColumns = @JoinColumn(name = "player_number"),
+	inverseJoinColumns = @JoinColumn(name = "team_id"))
 	private List<Player> players;
 
-	public Team(long id, String coach, long year, List <Player> players) {
-		this.id = id;
+	public Team(String coach, long year, List<Player> players) {
 		this.coach = coach;
 		this.year = year;
 		this.players = players;
