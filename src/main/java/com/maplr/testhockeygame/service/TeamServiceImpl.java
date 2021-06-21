@@ -1,11 +1,10 @@
 package com.maplr.testhockeygame.service;
 
+import org.springframework.stereotype.Component;
+
 import com.maplr.testhockeygame.model.Player;
 import com.maplr.testhockeygame.model.Team;
 import com.maplr.testhockeygame.repository.TeamRepository;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class TeamServiceImpl implements TeamService {

@@ -1,11 +1,9 @@
 package com.maplr.testhockeygame.service;
 
-import com.maplr.testhockeygame.model.Player;
-import com.maplr.testhockeygame.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Optional;
+import com.maplr.testhockeygame.model.Player;
+import com.maplr.testhockeygame.repository.PlayerRepository;
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
