@@ -1,7 +1,9 @@
 package com.maplr.testhockeygame.service;
 
-import org.springframework.stereotype.Service;
+import com.maplr.testhockeygame.model.Player;
 
-@Service
-public class PlayerService {
+public interface PlayerService {
+
+    Player promotePlayerToCaptain(Long id);
+
 }
