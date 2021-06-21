@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Successful  request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -59,7 +59,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"number\":99,\r\n  \"name\":\"Marion\",\r\n  \"lastname\":\"Félix\",\r\n  \"position\":\"forward\",\r\n  \"isCaptain\" : false\r\n}",
+					"raw": "{\r\n  \"number\":12,\r\n  \"name\":\"Julien\",\r\n  \"lastname\":\"Carmona\",\r\n  \"position\":\"forward\",\r\n  \"isCaptain\" : false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,7 +67,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/team/2021",
+					"raw": "http://localhost:8080/api/team/2020",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -76,7 +76,7 @@
 					"path": [
 						"api",
 						"team",
-						"2021"
+						"2020"
 					]
 				}
 			},
