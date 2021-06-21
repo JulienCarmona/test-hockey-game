@@ -14,11 +14,11 @@ public class Team {
 	private String coach;
 	private long year;
 
-	@ManyToMany
-	@JoinTable(name = "TEAMS_PLAYERS",
-	joinColumns = @JoinColumn(name = "player_number"),
-	inverseJoinColumns = @JoinColumn(name = "team_id"))
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "teamId")
 	private List<Player> players;
+
+	public Team() {}
 
 	public Team(String coach, long year, List<Player> players) {
 		this.coach = coach;

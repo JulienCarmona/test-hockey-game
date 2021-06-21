@@ -1,32 +1,35 @@
 package com.maplr.testhockeygame.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Objects;
 
 @Entity
 @Table(name = "PLAYER")
+@SequenceGenerator(name = "SEQ_GEN_PLAYER", sequenceName ="SEQ_PLAYER", allocationSize = 1)
 public class Player {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_PLAYER")
+	private long playerId;
 	private long number;
 	private String name;
-	private String lastName;
+	private String lastname;
 	private String position;
 	private boolean isCaptain;
 
-	@ManyToMany(mappedBy = "players")
-	private List<Team> teams;
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team team;
 
 	public Player() {}
 
-	public Player(long number, String name, String lastName, String position, boolean isCaptain) {
+	public Player(long number, String name, String lastname, String position, boolean isCaptain) {
 		this.number = number;
 		this.name = name;
-		this.lastName = lastName;
+		this.lastname = lastname;
 		this.position = position;
 		this.isCaptain = isCaptain;
 	}
@@ -47,12 +50,12 @@ public class Player {
 		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public boolean isCaptain() {
@@ -71,12 +74,22 @@ public class Player {
 		this.position = position;
 	}
 
-	public List<Team> getTeam() {
-		return teams;
+	@JsonIgnore
+	public long getPlayerId() {
+		return playerId;
 	}
 
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
+	}
+
+	@JsonIgnore
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	@Override
@@ -84,12 +97,12 @@ public class Player {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Player player = (Player) o;
-		return number == player.number && isCaptain == player.isCaptain && Objects.equals(name, player.name) && Objects.equals(lastName, player.lastName) && Objects.equals(position, player.position) && Objects.equals(teams, player.teams);
+		return number == player.number && isCaptain == player.isCaptain && Objects.equals(name, player.name) && Objects.equals(lastname, player.lastname) && Objects.equals(position, player.position);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(number, name, lastName, position, isCaptain, teams);
+		return Objects.hash(number, name, lastname, position, isCaptain);
 	}
 
 	@Override
@@ -97,10 +110,9 @@ public class Player {
 		return "Player{" +
 				"number=" + number +
 				", name='" + name + '\'' +
-				", lastName='" + lastName + '\'' +
+				", lastname='" + lastname + '\'' +
 				", position='" + position + '\'' +
 				", isCaptain=" + isCaptain +
-				", teams=" + teams +
 				'}';
 	}
 }
