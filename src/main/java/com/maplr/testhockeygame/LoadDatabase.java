@@ -15,12 +15,10 @@ public class LoadDatabase {
 
     @Bean
     public CommandLineRunner teamInitializer(TeamRepository teamRepository) {
-        return args -> {
-            teamRepository.saveAll(Arrays.asList(
+        return args -> teamRepository.saveAll(Arrays.asList(
                 new Team("Dominique Ducharme", 2019, initListPlayers()),
                 new Team("Dominique Ducharme", 2020, initListPlayers())
             ));
-        };
     }
 
     private List<Player> initListPlayers() {

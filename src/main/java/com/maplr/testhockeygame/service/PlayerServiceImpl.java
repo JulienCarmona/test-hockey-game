@@ -15,8 +15,8 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     public Player promotePlayerToCaptain(Long id) {
-        Player newCaptain = playerRepository.findById(id).orElseThrow();
-        Player oldCaptain = playerRepository.findByTeamAndIsCaptain(newCaptain.getTeam(), true);
+        var newCaptain = playerRepository.findById(id).orElseThrow();
+        var oldCaptain = playerRepository.findByTeamAndIsCaptain(newCaptain.getTeam(), true);
         oldCaptain.setCaptain(false);
         playerRepository.save(oldCaptain);
         newCaptain.setCaptain(true);

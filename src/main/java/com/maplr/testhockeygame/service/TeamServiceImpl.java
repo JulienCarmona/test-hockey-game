@@ -20,7 +20,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     public boolean addPlayerInTeamByYear(long year, Player player) {
-        Team team = getTeamByYear(year);
+        var team = getTeamByYear(year);
         int initSize = team.getPlayers().size();
         team.getPlayers().add(player);
         return initSize+1 == teamRepository.save(team).getPlayers().size();

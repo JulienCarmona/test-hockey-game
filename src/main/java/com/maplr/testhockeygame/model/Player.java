@@ -103,7 +103,7 @@ public class Player {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Player player = (Player) o;
+		var player = (Player) o;
 		return number == player.number && isCaptain == player.isCaptain && Objects.equals(name, player.name) && Objects.equals(lastname, player.lastname) && Objects.equals(position, player.position);
 	}
 

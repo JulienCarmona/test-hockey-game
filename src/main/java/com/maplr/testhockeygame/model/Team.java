@@ -62,7 +62,7 @@ public class Team {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Team team = (Team) o;
+		var team = (Team) o;
 		return id == team.id && year == team.year && Objects.equals(coach, team.coach) && Objects.equals(players, team.players);
 	}
 
